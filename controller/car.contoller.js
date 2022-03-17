@@ -1,4 +1,5 @@
 const db    = require('../config/database');
+const errorHandler = require('../utils/errorHandler')
 
 const Car   = db.cars;
 
@@ -11,7 +12,7 @@ exports.create = (req, res) => {
         year        : req.body.year
     }).then(car => {
         res.send(car);
-    });
+    }).catch(err => errorHandler.validationError(res, err.errors, 'Car creation'));
 }
 
 // FETCH all cars
@@ -25,7 +26,7 @@ exports.findAll = (req, res) => {
 exports.findById = (req, res) => { 
     Car.findByPk(req.params.id).then(user => {
         res.send(user);
-    });
+    }).catch(err => errorHandler.validationError(res, err.errors, 'Fetching car details'));
 };
     
 // Update a car
@@ -40,7 +41,7 @@ exports.update = (req, res) => {
         where: {id: id}
     }).then(() => {
         res.status(200).send({ message: 'successfully updated a car with id = ' + id });
-    });
+    }).catch(err => errorHandler.validationError(res, err.errors, 'Updating car details'));
 };
     
 // Delete a Car by Id
@@ -56,7 +57,7 @@ exports.delete = (req, res) => {
             where: { id: id }
         }).then(() => {
             res.status(200).send({ message: 'successfully deleted a car with id = ' + id });
-        });
+        }).catch(err => errorHandler.validationError(res, err.errors, 'Car deletion'));
     }
 };
 
@@ -65,19 +66,22 @@ exports.search = (req, res) => {
     const searchYear = req.body.year
     const searchBrand = req.body.brand
 
-    if (searchYear != null) {
+    console.log('searchBrand', searchBrand)
+    console.log('searchYear', searchYear)
+
+    if (searchYear != null && searchYear.length > 0) {
         Car.findAll({
             where : { year : searchYear }
         }).then(cars => {
             res.send(cars);
-        });
-    } else if (searchBrand != null) {
+        }).catch(err => errorHandler.validationError(res, err.errors, 'Car search'));
+    } else if (searchBrand != null && searchBrand.length > 0) {
         Car.findAll({
-            where : { brand : brand }
+            where : { brand : searchBrand }
         }).then(cars => {
             res.send(cars);
-        });
+        }).catch(err => errorHandler.validationError(res, err.errors, 'Car search'));
     } else {
-        res.status(400).send({ message: 'year or brand required.' + id })
+        res.status(400).send({ message: 'year or brand required.' })
     } 
 }
