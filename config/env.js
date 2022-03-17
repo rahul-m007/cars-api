@@ -1,10 +1,10 @@
 require('dotenv').config();
 
 const env = {
-    database: process.env.DATABASE,
-    username: process.env.USER_NAME,
-    password: process.env.PASSWORD,
-    host: process.env.HOST,
+    database: 'test',
+    username: 'root',
+    password: 'sqladmin',
+    host: 'localhost',
     dialect: 'mysql',
     pool: {
         max: 5,
