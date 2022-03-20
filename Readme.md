@@ -23,6 +23,104 @@ $ npm start
 ```
 Note: To test this application you can use any api testing tool. Postman is my personal favourite.
 
+## REST API
+***
+### [C] Create / Add a car
+
+#### Request
+`POST /api/admin/car`
+
+    {
+        "brand" : "Shelby",
+        "model" : "Cobra",
+        "engineType" : "Petrol",
+        "year" : "1966"
+    }
+
+#### Response
+    {
+        "id": 1,
+        "brand": "Shelby",
+        "model": "Cobra",
+        "engineType": "Petrol",
+        "year": "1966",
+        "updatedAt": "2022-03-17T17:19:57.636Z",
+        "createdAt": "2022-03-17T17:19:57.636Z"
+    }
+
+***
+
+### [R] Read / Get a car info
+
+#### Request
+`GET /api/admin/car/1`  -> where 1 is the car id
+
+#### Response
+    {
+        "id": 1,
+        "brand": "Shelby",
+        "model": "Cobra",
+        "engineType": "Petrol",
+        "year": "1966",
+        "updatedAt": "2022-03-17T17:19:57.636Z",
+        "createdAt": "2022-03-17T17:19:57.636Z"
+    }
+
+***
+
+### [U] Update a car info
+#### Request
+`PUT /api/admin/car/1` -> where 1 is the car id
+
+    {
+        "brand" : "Shelby",
+        "model" : "Cobra",
+        "engineType" : "Diesel",
+        "year" : "1968"
+    }
+
+#### Response
+
+    {
+        "message": "successfully updated a car with id = 1"
+    }
+***
+### [D] Delete a car info
+#### Request
+`DELETE /api/admin/car/1` -> where 1 is the car id
+
+#### Response
+    {
+        "message": "successfully deleted a car with id = 1"
+    }
+***
+### [S] Search for car info
+#### Request
+`POST /api/admin/car/search`
+
+    {
+        "brand" : "Shelby"
+    }
+
+or
+
+    {
+        "year" : "1978"
+    }
+
+#### Response
+    {
+        "id": 1,
+        "brand": "Shelby",
+        "model": "Cobra",
+        "engineType": "Petrol",
+        "year": "1978",
+        "updatedAt": "2022-03-17T17:19:57.636Z",
+        "createdAt": "2022-03-17T17:19:57.636Z"
+    }
+
+***
+
 ## Status Codes
 * 200 - Success
 * 422 - Input Error returning after validation

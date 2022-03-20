@@ -66,9 +66,6 @@ exports.search = (req, res) => {
     const searchYear = req.body.year
     const searchBrand = req.body.brand
 
-    console.log('searchBrand', searchBrand)
-    console.log('searchYear', searchYear)
-
     if (searchYear != null && searchYear.length > 0) {
         Car.findAll({
             where : { year : searchYear }
