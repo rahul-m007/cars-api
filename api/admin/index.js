@@ -1,7 +1,7 @@
 const route         = require('express').Router();
 
 module.exports = (app) => {
-    // Either check admin specific varification here 
+    // Either check admin specific verification here 
     // or create a middleware pipe to do the same.
 
     app.use('/admin', route)

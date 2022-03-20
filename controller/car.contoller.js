@@ -50,7 +50,7 @@ exports.delete = (req, res) => {
     if(isNaN(parseInt(id))) {
         res.status(422).send({ 
             message: 'Car deletion failed', errorAt: {
-            id : 'Id should be a number'
+            id : 'Invalid Id'
         }})
     } else {
         Car.destroy({
